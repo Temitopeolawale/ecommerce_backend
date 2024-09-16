@@ -11,6 +11,9 @@ import Brand from '../models/BrandSchema.js';
 
 export const createProduct = asynHandler(
     async(req,res)=>{
+
+        const  convertedImages = req.files.map((file)=>file.path)
+
         const{name,description,category,sizes,colors,price,totalQty,brand}=req.body
         const productExist=await Product.findOne({name})
         if(productExist){
@@ -44,6 +47,7 @@ export const createProduct = asynHandler(
             price,
             totalQty,
             brand,
+            images:convertedImages
         })
         //push the product to category
         categoryFound.products.push(product._id)

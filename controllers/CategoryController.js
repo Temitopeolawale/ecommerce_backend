@@ -17,6 +17,7 @@ export const createCategory =asynHandler(
         const category=await Category.create({
                 name:name.toLowerCase(),
                 user:req.UserAuthID,
+                image:req.file.path,
         })
         res.send(category)
         console.log('new category created')

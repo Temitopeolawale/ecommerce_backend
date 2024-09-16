@@ -68,10 +68,9 @@ export const loginUser =asynHandler(
 
 export const userProfile=asynHandler(
     async(req,res)=>{
-       const token = getTokenHeader(req)
-       const verified = verifyToken(token)
-        console.log(req)
-        res.send(`welcome to profile page`)
+       //find the user
+       const user = await User.findById(req.UserAuthID).populate('orders')
+       res.send({status:"success", user})
     }
 )
 
