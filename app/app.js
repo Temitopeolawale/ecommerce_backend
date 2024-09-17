@@ -1,4 +1,5 @@
 import express from "express";
+import path from 'path'
 import dbConnect from "../config/dbConnect.js";
 import dotenv from 'dotenv'
 import UserRoute from "../routes/UserRoute.js";
@@ -79,8 +80,13 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 // app.use(bodyParser.)
-
+//Server static file 
+app.use(express.static('Public'))
 //routes
+//Home Routes
+app.get('/',(req,res)=>{
+  res.sendFile(path.join('Public','index.html'))
+})
 app.use('/api/v1/user/',UserRoute)
 app.use('/api/v1/products/',ProductRoute)
 app.use('/api/v1/categories/',CategoryRoute)
